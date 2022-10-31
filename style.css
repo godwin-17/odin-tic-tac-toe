@@ -28,4 +28,8 @@ body {
 
 .game-cell {
   border: 2px solid black;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
