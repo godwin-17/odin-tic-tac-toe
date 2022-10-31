@@ -31,6 +31,9 @@ const Game = (() => {
 
     cells.forEach(cell => {
       cell.addEventListener("click", () => {
+        if (cell.innerHTML != "") {
+          return;
+        }
         cell.innerHTML = turn.mark;
         gameboard[cell.dataset.index] = cell.innerHTML;
         checkTurn();
