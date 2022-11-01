@@ -46,6 +46,7 @@ const Game = (() => {
     winMsg.textContent = "";
   }
 
+  let isWinner = false;
 
   function checkWinner() {
     winningCombinations.forEach((combo) => {
@@ -55,6 +56,15 @@ const Game = (() => {
 
       if (gameboard[a] !="" && gameboard[a] === gameboard[b] && gameboard[b] === gameboard[c]) {
         winMsg.textContent = `The Winner is ${turn.name}`;
+        isWinner = true;
+      }
+
+      if (isWinner) {
+        return;
+      } else if (gameboard.includes("")) {
+        return;
+      } else {
+        winMsg.textContent = `It's a draw`;
       }
     });
   }
@@ -72,9 +82,15 @@ const Game = (() => {
         if (cell.innerHTML != "") {
           return;
         }
-        cell.innerHTML = turn.mark;
-        gameboard[cell.dataset.index] = cell.innerHTML;
-        checkTurn();
+
+        if (isWinner === false) {
+          cell.innerHTML = turn.mark;
+          gameboard[cell.dataset.index] = cell.innerHTML;
+          checkTurn();
+        } else {
+          console.log("GAME FINISHED");
+          return;
+        }
       });
     });
   }
