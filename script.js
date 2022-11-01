@@ -17,8 +17,8 @@ const Player = (name, mark) => {
 const Game = (() => {
   let {gameboard} = Gameboard;
   const cells = document.querySelectorAll(".game-cell");
-  const player1 = Player("Player 1", "O");
-  const player2 = Player("Player 2", "X");
+  const player1 = Player("Player 1", "X");
+  const player2 = Player("Player 2", "O");
   const restartButton = document.querySelector("#restart-button");
   const winMsg = document.querySelector(".winner-message");
   
@@ -45,7 +45,7 @@ const Game = (() => {
     });
     winMsg.textContent = "";
     isWinner = false;
-    turn = player2;
+    turn = player1;
   }
 
   let isWinner = false;
@@ -71,11 +71,11 @@ const Game = (() => {
     });
   }
 
-  let turn = player2;
+  let turn = player1;
 
   function checkTurn() {
-    turn === player1 ? turn = player2 : turn = player1;
     checkWinner();
+    turn === player1 ? turn = player2 : turn = player1;
   }
 
   function addMark() {
@@ -90,7 +90,6 @@ const Game = (() => {
           gameboard[cell.dataset.index] = cell.innerHTML;
           checkTurn();
         } else {
-          console.log("GAME FINISHED");
           return;
         }
       });
