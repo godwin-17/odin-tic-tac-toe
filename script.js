@@ -15,12 +15,13 @@ const Player = (name, mark) => {
 };
 
 const Game = (() => {
-  const {gameboard} = Gameboard;
+  let {gameboard} = Gameboard;
   const cells = document.querySelectorAll(".game-cell");
-
   const player1 = Player("Player 1", "O");
   const player2 = Player("Player 2", "X");
-
+  const restartButton = document.querySelector("#restart-button");
+  const winMsg = document.querySelector(".winner-message");
+  
   const winningCombinations = [
     // Horizontal
     [0, 1, 2],
@@ -35,6 +36,17 @@ const Game = (() => {
     [2, 4, 6]
   ];
 
+  restartButton.addEventListener("click", clearGameboard);
+
+  function clearGameboard() {
+    gameboard = ["", "", "", "", "", "", "", "", ""];
+    cells.forEach(cell => {
+      cell.innerHTML = "";
+    });
+    winMsg.textContent = "";
+  }
+
+
   function checkWinner() {
     winningCombinations.forEach((combo) => {
       let a = combo[0];
@@ -42,7 +54,7 @@ const Game = (() => {
       let c = combo[2];
 
       if (gameboard[a] !="" && gameboard[a] === gameboard[b] && gameboard[b] === gameboard[c]) {
-        console.log(`The winner is ${turn.name}`);
+        winMsg.textContent = `The Winner is ${turn.name}`;
       }
     });
   }
