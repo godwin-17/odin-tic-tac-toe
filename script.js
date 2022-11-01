@@ -44,6 +44,8 @@ const Game = (() => {
       cell.innerHTML = "";
     });
     winMsg.textContent = "";
+    isWinner = false;
+    turn = player2;
   }
 
   let isWinner = false;
